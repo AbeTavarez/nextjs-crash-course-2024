@@ -1,6 +1,6 @@
 import { members } from "@/db";
 import Image from "next/image";
-
+import { notFound } from "next/navigation";
 
 interface MemberPageProps {
   params: {
@@ -12,7 +12,7 @@ export default function MemberPage(props: MemberPageProps) {
   const member = members.find((m) => m.id === props.params.id);
 
   if (!member) {
-    return <h1>Member Not Found!</h1>;
+    return notFound();
   }
 
   return (

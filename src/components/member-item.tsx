@@ -14,7 +14,7 @@ export default function MemberItem(props: MemberItemProps) {
 const {member} = props;
 
   return (
-    <Link href={`/members/${member.id}`}>
+    <Link href={`/members/${member.id}`} className="flex flex-col items-center">
         <Image 
         width={100}
         height={100}
