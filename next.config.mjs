@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "cloudflare-ipfs.com",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
   },
 };

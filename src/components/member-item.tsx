@@ -1,20 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Member } from "@/types";
+
 
 interface MemberItemProps {
-    member: {
-        id: string;
-        name: string;
-        avatar: string;
-        createdAt: string;
-    }
+    member: Member
 }
 
 export default function MemberItem(props: MemberItemProps) {
 const {member} = props;
 
   return (
-    <Link href={`/members/${member.id}`} className="flex flex-col items-center">
+    <Link href={`/members/${member._id}`} className="flex flex-col items-center">
         <Image 
         width={100}
         height={100}

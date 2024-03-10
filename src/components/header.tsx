@@ -7,6 +7,7 @@ export default function Header() {
 
       <div className="space-x-4 text-xl">
         <Link href="/members">Members</Link>
+        <Link href="/members/new">Create</Link>
         <Link href="/about">About</Link>
       </div>
     </nav>
