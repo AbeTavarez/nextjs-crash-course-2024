@@ -1,6 +1,6 @@
 import { members } from "@/db";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import dbClient from "@/db/mongodb";
 import { ObjectId } from "mongodb";
 
@@ -18,11 +18,19 @@ export default async function MemberPage(props: MemberPageProps) {
     .collection("members")
     .findOne({ _id: new ObjectId(props.params.id) });
 
-    console.log(member);
-    
+  console.log(member);
 
   if (!member) {
     return notFound();
+  }
+
+  async function deleteMember(id: ObjectId) {
+    "use server";
+    await dbClient
+      .db("next-members")
+      .collection("members")
+      .findOneAndDelete({ _id: new ObjectId(props.params.id) });
+    redirect("/members");
   }
 
   return (
@@ -40,6 +48,16 @@ export default async function MemberPage(props: MemberPageProps) {
           <div className="text-2xl font-bold">{member.name}</div>
           <div>Member Since: {member.createdAt}</div>
         </div>
+      </div>
+
+      <div className="flex gap-2 justify-end p-5">
+        <form>
+          <button className="bg-yellow-300 p-3 rounded">Edit</button>
+        </form>
+
+        <form action={deleteMember.bind(null, member._id)}>
+          <button className="bg-red-500 p-3 rounded">Delete</button>
+        </form>
       </div>
     </div>
   );
