@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import dbClient from "@/db/mongodb";
 import { ObjectId } from "mongodb";
 import Link from "next/link";
+import { deleteMember } from "@/actions";
 
 interface MemberPageProps {
   params: {
@@ -23,14 +24,7 @@ export default async function MemberPage(props: MemberPageProps) {
     return notFound();
   }
 
-  async function deleteMember(id: ObjectId) {
-    "use server";
-    await dbClient
-      .db("next-members")
-      .collection("members")
-      .findOneAndDelete({ _id: new ObjectId(props.params.id) });
-    redirect("/members");
-  }
+  
 
   return (
     <div className="container mx-auto bg-blue-700">

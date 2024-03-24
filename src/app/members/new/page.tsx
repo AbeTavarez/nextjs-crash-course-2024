@@ -1,25 +1,6 @@
-import dbClient from "@/db/mongodb";
-import { redirect } from "next/navigation";
+import { createMember } from "@/actions";
 
 export default function MemberCreatePage() {
-
-
-    // server action
-    const createMember = async(formData: FormData) => {
-        "use server"
-
-        const name = formData.get('name') as string;
-        const avatar = formData.get('avatar') as string;
-
-        const member = await dbClient
-        .db('next-members')
-        .collection('members')
-        .insertOne({name, avatar, createdAt: new Date().toISOString()});
-
-        console.log(member);
-        redirect('/members');
-    }
-
   return (
     <form action={createMember}>
       <div className="flex flex-col gap-3 max-w-xl mx-auto bg-slate-300 p-5 rounded">
