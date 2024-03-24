@@ -1,8 +1,8 @@
-import { members } from "@/db";
 import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
 import dbClient from "@/db/mongodb";
 import { ObjectId } from "mongodb";
+import Link from "next/link";
 
 interface MemberPageProps {
   params: {
@@ -11,7 +11,6 @@ interface MemberPageProps {
 }
 
 export default async function MemberPage(props: MemberPageProps) {
-  // const member = members.find((m) => m.id === props.params.id);
 
   const member = await dbClient
     .db("next-members")
@@ -51,9 +50,7 @@ export default async function MemberPage(props: MemberPageProps) {
       </div>
 
       <div className="flex gap-2 justify-end p-5">
-        <form>
-          <button className="bg-yellow-300 p-3 rounded">Edit</button>
-        </form>
+        <Link href={`/members/${member._id}/edit`}  className="bg-yellow-300 p-3 rounded">Edit</Link>
 
         <form action={deleteMember.bind(null, member._id)}>
           <button className="bg-red-500 p-3 rounded">Delete</button>
