@@ -8,7 +8,7 @@ interface HeroProps {
 
 export default function Hero(props: HeroProps) {
   return (
-    <div className="relative h-screen">
+    <div className="relative h-96">
       <Image
         src={props.imageUrl}
         alt={props.imageAlt}
