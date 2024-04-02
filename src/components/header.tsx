@@ -28,7 +28,7 @@ export default function Header() {
         {
           user && (
             <Image 
-              src={user.picture}
+              src={user.picture!}
               width={50}
               height={50}
               alt="user photo"
