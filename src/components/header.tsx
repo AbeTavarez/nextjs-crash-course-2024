@@ -25,8 +25,7 @@ export default function Header() {
       </Link>
 
       <div className="space-x-4 text-xl flex items-center">
-        {
-          user && (
+        { user && (
             <Image 
               src={user.picture!}
               width={50}
