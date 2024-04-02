@@ -1,19 +1,22 @@
 "use client";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Header() {
   const { user, error, isLoading } = useUser();
   const router = useRouter();
+  const path = usePathname();
 
   console.log(user);
+  console.log(path);
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>{error.message}</div>
   
-  if (user) {
+  if (user && path === '/') {
     router.push('/members');
   }
 
